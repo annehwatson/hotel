@@ -13,6 +13,7 @@ module Hotel
 
     def reserve_room(start_date, end_date, is_block =false)
       reservation_data = {
+        #room number,
         start_date: Date.parse(start_date),
         end_date: Date.parse(end_date),
         cost_per_night: unless is_block == true

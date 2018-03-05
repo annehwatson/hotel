@@ -10,8 +10,8 @@ module Hotel
       @cost_per_night = input[:cost_per_night]
       @date_range = [@start_date..@end_date]
 
-      unless @end_time == nil || @start_time == nil
-        if @end_time < @start_time
+      unless @end_date == nil || @start_date == nil
+        if @end_date < @start_date
           raise ArgumentError.new("Reservation end date cannot be before reservation start date")
         end
       end
@@ -29,12 +29,13 @@ module Hotel
 end
 
 # reservation_data = {
-#   start_date: Date.parse("2016-10-10"),
-#   end_date: Date.parse("2016-10-12"),
+#   start_date: Date.parse("2016-10-12"),
+#   end_date: Date.parse("2016-10-10"),
 #   cost_per_night: 200.00
 # }
-#
+
 # my_reservation = Hotel::Reservation.new(reservation_data)
+# p my_reservation
 # p my_reservation.date_range
 # p my_reservation.calculate_stay_duration
 # p my_reservation.total_cost
