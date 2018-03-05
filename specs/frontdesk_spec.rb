@@ -1,5 +1,4 @@
 require_relative 'spec_helper'
-require 'FrontDesk'
 
 describe "FrontDesk class" do
   describe "Initializer" do
@@ -28,7 +27,15 @@ describe "FrontDesk class" do
 
   describe "view_reservations_list(date)" do
     it "returns a list of reservations for a specific date" do
-      
+
+    end
+  end
+
+  describe "total_cost" do
+    it "accurately returns the total cost of a specified reservation" do
+      front_desk = Hotel::FrontDesk.new
+      my_reservation = front_desk.reserve_room("2017-08-01", "2017-08-02")
+      my_reservation.total_cost.must_equal(200.00)
     end
   end
 
