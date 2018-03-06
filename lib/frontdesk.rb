@@ -43,7 +43,7 @@ module Hotel
   end
 end
 
-my_desk = Hotel::FrontDesk.new
-my_desk.reserve_room("2017-08-01", "2017-08-02")
-my_desk.reserve_room("2017-09-01", "2017-09-02")
-p my_desk.view_reservations_list("2017-09-01")
+# my_desk = Hotel::FrontDesk.new
+# my_desk.reserve_room("2017-08-01", "2017-08-02")
+# my_desk.reserve_room("2017-09-01", "2017-09-02")
+# p my_desk.view_reservations_list("2017-09-01")

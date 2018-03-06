@@ -27,7 +27,9 @@ describe "FrontDesk class" do
 
   describe "view_reservations_list(date)" do
     it "returns a list of reservations for a specific date" do
-
+      front_desk = Hotel::FrontDesk.new
+      result = front_desk.reserve_room("2020-10-12", "2020-10-13")
+      front_desk.view_reservations_list("2020-10-12").must_include(result)
     end
   end
 

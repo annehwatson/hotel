@@ -8,7 +8,7 @@ module Hotel
       @start_date = input[:start_date]
       @end_date = input[:end_date]
       @cost_per_night = input[:cost_per_night]
-      @date_range = (@start_date.to_date)..(@end_date.to_date)
+      @date_range = (@start_date)..(@end_date)
 
       unless @end_date == nil || @start_date == nil
         if @end_date < @start_date
