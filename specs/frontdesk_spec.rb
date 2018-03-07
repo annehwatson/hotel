@@ -8,10 +8,11 @@ describe "FrontDesk class" do
     end
   end
 
-  describe "print_room_list" do
-    it "returns a list of all the rooms in the hotel" do
+  describe "first_available_room" do
+    it "returns the first element from the room_numbers array that is not reserved for the specified date range" do
       front_desk = Hotel::FrontDesk.new
-      front_desk.rooms
+      result = front_desk.reserve_room("2020-10-12", "2020-10-13")
+      assert front_desk.first_available_room("2020-10-12", "2020-10-13") != result.room
     end
   end
 
@@ -23,6 +24,13 @@ describe "FrontDesk class" do
       result.start_date.must_be_instance_of(Date)
       result.end_date.must_be_instance_of(Date)
     end
+
+    it "does not assign a room that is not available for a specified date range" do
+      front_desk = Hotel::FrontDesk.new
+      reservation_one = front_desk.reserve_room("2020-10-12", "2020-10-13")
+      reservation_two = front_desk.reserve_room("2020-10-12", "2020-10-13")
+      assert reservation_one.room != reservation_two.room
+    end
   end
 
   describe "view_reservations_list(date)" do
@@ -31,14 +39,36 @@ describe "FrontDesk class" do
       result = front_desk.reserve_room("2020-10-12", "2020-10-13")
       front_desk.view_reservations_list("2020-10-12").must_include(result)
     end
+
   end
 
-  describe "total_cost" do
-    it "accurately returns the total cost of a specified reservation" do
+  describe "view_available_rooms" do
+    it "returns a list of rooms available for a specified date range" do
       front_desk = Hotel::FrontDesk.new
-      my_reservation = front_desk.reserve_room("2017-08-01", "2017-08-02")
-      my_reservation.total_cost.must_equal(200.00)
+
     end
+
+    it "returns the complete list of rooms if there are no reservations" do
+      front_desk = Hotel::FrontDesk.new
+      front_desk.room_numbers.length.must_equal(front_desk.NUMBER_OF_ROOMS)
+      result = front_desk.view_available_rooms("2017-08-01", "2017-08-02")
+      result.must_be_instance_of(Array)
+      result.length.must_equal(front_desk.NUMBER_OF_ROOMS)
+    end
+
+    it "returns a list of rooms that is not affected by reservations that don't overlap the date specified" do
+
+    end
+
+    it "does not list the rooms that are not available for a specified date range" do
+
+    end
+
+    it "shows rooms that have reservations ending on the requested start date in the availability list" do
+
+    end
+
+
   end
 
 

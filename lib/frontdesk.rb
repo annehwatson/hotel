@@ -4,21 +4,37 @@ require_relative "reservation"
 
 module Hotel
   class FrontDesk
-    attr_accessor :rooms, :reservations, :start_date, :end_date
+    attr_accessor :rooms, :reservations, :start_date, :end_date, :room_numbers
+    attr_reader :NUMBER_OF_ROOMS
 
     def initialize
-      @rooms = [1..20] # possibly class Room instances
+      @NUMBER_OF_ROOMS = 20
+      @room_numbers = []
+      idx = 0
+      @NUMBER_OF_ROOMS.times do |idx|
+        @room_numbers << (idx + 1)
+      end
       @reservations = []
     end
 
-    def find_available_room(start_date, end_date)
-      #return first available room that is open for all of the dates passed in to reserve_room
+    def view_available_rooms(start_date, end_date)
 
+      @reservations.each do |reservation|
+        if @room_numbers.include?(reservation.room) && (reservation.date_range.include?(Date.parse(start_date)) || reservation.date_range.include?(Date.parse(end_date)))
+          @room_numbers.delete(reservation.room)
+        end
+      end
+      return @room_numbers
+    end
+
+    def first_available_room(start_date, end_date)
+      return view_available_rooms(start_date,end_date).first
     end
 
     def reserve_room(start_date, end_date, is_block =false)
+      assigned_room = first_available_room(start_date, end_date)
       reservation_data = {
-        #room_number: find_available_room,
+        room: assigned_room,
         start_date: Date.parse(start_date),
         end_date: Date.parse(end_date),
         cost_per_night: unless is_block == true
@@ -44,6 +60,8 @@ module Hotel
 end
 
 # my_desk = Hotel::FrontDesk.new
-# my_desk.reserve_room("2017-08-01", "2017-08-02")
-# my_desk.reserve_room("2017-09-01", "2017-09-02")
-# p my_desk.view_reservations_list("2017-09-01")
+# p my_desk.reserve_room("2017-08-01", "2017-08-02")
+# p my_desk.reserve_room("2017-08-01", "2017-08-02")
+# p my_desk.reserve_room("2017-08-01", "2017-08-02")
+# p my_desk.reserve_room("2017-08-01", "2017-08-02")
+# p my_desk.room_numbers

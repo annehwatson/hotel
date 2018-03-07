@@ -2,13 +2,14 @@ require 'Date'
 
 module Hotel
   class Reservation
-    attr_accessor :start_date, :end_date, :cost_per_night, :date_range
+    attr_accessor :start_date, :end_date, :cost_per_night, :date_range, :room
 
     def initialize(input)
       @start_date = input[:start_date]
       @end_date = input[:end_date]
       @cost_per_night = input[:cost_per_night]
       @date_range = (@start_date)..(@end_date)
+      @room = input[:room]
 
       unless @end_date == nil || @start_date == nil
         if @end_date < @start_date
