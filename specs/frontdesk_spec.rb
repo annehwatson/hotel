@@ -45,7 +45,11 @@ describe "FrontDesk class" do
   describe "view_available_rooms" do
     it "returns a list of rooms available for a specified date range" do
       front_desk = Hotel::FrontDesk.new
-
+      reservation = front_desk.reserve_room("2020-10-12", "2020-10-13")
+      available_rooms = front_desk.view_available_rooms("2020-10-12", "2020-10-13")
+      assert !available_rooms.include?(reservation.room)
+      available_rooms.length.must_equal(front_desk.NUMBER_OF_ROOMS - 1)
+      available_rooms.must_be_instance_of(Array)
     end
 
     it "returns the complete list of rooms if there are no reservations" do
