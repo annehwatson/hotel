@@ -39,6 +39,12 @@ describe "FrontDesk class" do
       reservation_two = front_desk.reserve_room("2020-10-12", "2020-10-13")
       assert reservation_one.room != reservation_two.room
     end
+
+    it "charges 180.00 per night if block is specified" do
+      front_desk = Hotel::FrontDesk.new
+      reservation = front_desk.reserve_room("2020-10-12", "2020-10-13", is_block=true)
+      reservation.total_cost.must_equal(180.00)
+    end
   end
 
   describe "view_reservations_list(date)" do
