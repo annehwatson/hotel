@@ -20,15 +20,15 @@ module Hotel
     def view_available_rooms(start_date, end_date)
 
       @reservations.each do |reservation|
-        if @room_numbers.include?(reservation.room) && (reservation.date_range.include?(Date.parse(start_date)) || reservation.date_range.include?(Date.parse(end_date)))
+        # if @room_numbers.include?(reservation.room) && (reservation.date_range.include?(Date.parse(start_date)) || reservation.date_range.include?(Date.parse(end_date)))
+        #   @room_numbers.delete(reservation.room)
+        overlapping_dates = (reservation.date_range.to_a) & (Date.parse(start_date)...Date.parse(end_date)).to_a
+
+        if @room_numbers.include?(reservation.room) & !overlapping_dates.empty?
           @room_numbers.delete(reservation.room)
         end
       end
       return @room_numbers
-    end
-
-    def overlap
-
     end
 
     def first_available_room(start_date, end_date)
@@ -64,8 +64,5 @@ module Hotel
 end
 
 # my_desk = Hotel::FrontDesk.new
-# p my_desk.reserve_room("2017-08-01", "2017-08-02")
-# p my_desk.reserve_room("2017-08-01", "2017-08-02")
-# p my_desk.reserve_room("2017-08-01", "2017-08-02")
-# p my_desk.reserve_room("2017-08-01", "2017-08-02")
-# p my_desk.room_numbers
+# p reservation = my_desk.reserve_room("2017-10-12", "2017-10-13")
+# p my_desk.view_available_rooms("2020-10-15","2020-10-16")
