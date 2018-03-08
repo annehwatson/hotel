@@ -81,6 +81,5 @@ describe "FrontDesk class" do
       available_rooms.must_include(reservation.room)
     end
   end
-
-
+  
 end
