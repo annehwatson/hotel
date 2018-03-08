@@ -62,7 +62,3 @@ module Hotel
 
   end
 end
-
-# my_desk = Hotel::FrontDesk.new
-# p reservation = my_desk.reserve_room("2017-10-12", "2017-10-13")
-# p my_desk.view_available_rooms("2020-10-15","2020-10-16")

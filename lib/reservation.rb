@@ -29,15 +29,3 @@ module Hotel
     end
   end
 end
-
-# reservation_data = {
-#   start_date: Date.parse("2016-10-12"),
-#   end_date: Date.parse("2016-10-10"),
-#   cost_per_night: 200.00
-# }
-
-# my_reservation = Hotel::Reservation.new(reservation_data)
-# p my_reservation
-# p my_reservation.date_range
-# p my_reservation.calculate_stay_duration
-# p my_reservation.total_cost
