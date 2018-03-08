@@ -61,18 +61,25 @@ describe "FrontDesk class" do
     end
 
     it "returns a list of rooms that is not affected by reservations that don't overlap the date specified" do
-
+      front_desk = Hotel::FrontDesk.new
+      reservation = front_desk.reserve_room("2020-10-12", "2020-10-13")
+      unrelated_availability = front_desk.view_available_rooms("2020-10-15","2020-10-16")
+      unrelated_availability.length.must_equal(20)
+      unrelated_availability.must_include(reservation.room)
     end
 
     it "does not list the rooms that are not available for a specified date range" do
-
+      front_desk = Hotel::FrontDesk.new
+      reservation = front_desk.reserve_room("2020-10-12", "2020-10-15")
+      assert !front_desk.view_available_rooms("2020-10-12", "2020-10-15").include?(reservation.room)
     end
 
     it "shows rooms that have reservations ending on the requested start date in the availability list" do
-
+      front_desk = Hotel::FrontDesk.new
+      reservation = front_desk.reserve_room("2020-10-12", "2020-10-13")
+      available_rooms = front_desk.view_available_rooms("2020-10-13","2020-10-14")
+      available_rooms.must_include(reservation.room)
     end
-
-
   end
 
 
