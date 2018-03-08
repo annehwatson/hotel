@@ -14,6 +14,14 @@ describe "FrontDesk class" do
       result = front_desk.reserve_room("2020-10-12", "2020-10-13")
       assert front_desk.first_available_room("2020-10-12", "2020-10-13") != result.room
     end
+
+    it "handles when view_available_rooms is empty" do
+      front_desk = Hotel::FrontDesk.new
+      20.times do
+        front_desk.reserve_room("2020-10-12", "2020-10-13")
+      end
+      front_desk.first_available_room("2020-10-12", "2020-10-13").must_be_nil
+    end
   end
 
   describe "reserve_room" do
@@ -74,6 +82,13 @@ describe "FrontDesk class" do
       assert !front_desk.view_available_rooms("2020-10-12", "2020-10-15").include?(reservation.room)
     end
 
+    it "shows rooms as unavailable for a date range that the room might be partially available for" do
+      front_desk = Hotel::FrontDesk.new
+      reservation = front_desk.reserve_room("2020-10-12", "2020-10-15")
+      search = front_desk.view_available_rooms("2020-10-10", "2020-10-17")
+      assert !search.include?(reservation.room)
+    end
+
     it "shows rooms that have reservations ending on the requested start date in the availability list" do
       front_desk = Hotel::FrontDesk.new
       reservation = front_desk.reserve_room("2020-10-12", "2020-10-13")
@@ -81,5 +96,5 @@ describe "FrontDesk class" do
       available_rooms.must_include(reservation.room)
     end
   end
-  
+
 end

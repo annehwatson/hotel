@@ -27,6 +27,10 @@ module Hotel
       return @room_numbers
     end
 
+    def overlap
+
+    end
+
     def first_available_room(start_date, end_date)
       return view_available_rooms(start_date,end_date).first
     end

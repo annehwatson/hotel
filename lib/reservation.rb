@@ -16,6 +16,7 @@ module Hotel
           raise ArgumentError.new("Reservation end date cannot be before reservation start date")
         end
       end
+
     end
 
     def calculate_stay_duration
