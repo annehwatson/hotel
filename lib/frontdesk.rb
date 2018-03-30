@@ -5,13 +5,13 @@ require_relative "reservation"
 module Hotel
   class FrontDesk
     attr_accessor :rooms, :reservations, :start_date, :end_date, :room_numbers
-    attr_reader :NUMBER_OF_ROOMS
+    attr_reader :number_of_rooms
 
     def initialize
-      @NUMBER_OF_ROOMS = 20
+      @number_of_rooms = 20
       @room_numbers = []
       idx = 0
-      @NUMBER_OF_ROOMS.times do |idx|
+      @number_of_rooms.times do |idx|
         @room_numbers << (idx + 1)
       end
       @reservations = []

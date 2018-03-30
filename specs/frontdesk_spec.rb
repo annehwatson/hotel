@@ -62,16 +62,16 @@ describe "FrontDesk class" do
       reservation = front_desk.reserve_room("2020-10-12", "2020-10-13")
       available_rooms = front_desk.view_available_rooms("2020-10-12", "2020-10-13")
       assert !available_rooms.include?(reservation.room)
-      available_rooms.length.must_equal(front_desk.NUMBER_OF_ROOMS - 1)
+      available_rooms.length.must_equal(front_desk.number_of_rooms - 1)
       available_rooms.must_be_instance_of(Array)
     end
 
     it "returns the complete list of rooms if there are no reservations" do
       front_desk = Hotel::FrontDesk.new
-      front_desk.room_numbers.length.must_equal(front_desk.NUMBER_OF_ROOMS)
+      front_desk.room_numbers.length.must_equal(front_desk.number_of_rooms)
       result = front_desk.view_available_rooms("2017-08-01", "2017-08-02")
       result.must_be_instance_of(Array)
-      result.length.must_equal(front_desk.NUMBER_OF_ROOMS)
+      result.length.must_equal(front_desk.number_of_rooms)
     end
 
     it "returns a list of rooms that is not affected by reservations that don't overlap the date specified" do
