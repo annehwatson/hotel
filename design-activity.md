@@ -53,4 +53,5 @@
 > My FrontDesk class handles almost all of the business logic (pulls reservation lists, makes reservations, finds available rooms, and I was originally planning on implementing blocks in that class as well)
 
 * Describe what changes would need to be made to improve this design and how the resulting design would be an improvement
-> I like how the instructor implementation separates out the date logic into the DateRange class. My implementation has date references for the overlap in my FrontDesk#view_available_rooms method and can be confusing to read
+> I like how the instructor implementation separates out the date logic into the DateRange class. My implementation has date references for the overlap in my FrontDesk#view_available_rooms method and can be confusing to read.
+I could make a separate DateRange class to handle the overlapping dates, checkout before check in errors, and the duration calculation like in the instructor implementation
