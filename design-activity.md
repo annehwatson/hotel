@@ -46,3 +46,11 @@
 * Which implementation better adheres to the single responsibility principle?
 > I think Imp B better adheres to single responsibility
 * Bonus question after Metz ch. 3: Which implementation is more loosely coupled?
+
+## Hotel
+
+* Identify one place in my Hotel where a class takes on multiple roles or directly modifies the attributes of another class
+> My FrontDesk class handles almost all of the business logic (pulls reservation lists, makes reservations, finds available rooms, and I was originally planning on implementing blocks in that class as well)
+
+* Describe what changes would need to be made to improve this design and how the resulting design would be an improvement
+> I like how the instructor implementation separates out the date logic into the DateRange class. My implementation has date references for the overlap in my FrontDesk#view_available_rooms method and can be confusing to read
